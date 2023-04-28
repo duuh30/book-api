@@ -27,7 +27,7 @@ class RegisterController extends Controller
      * @param UserRegisterRequest $request
      * @return mixed
      */
-    public function register(UserRegisterRequest $request)
+    public function register(UserRegisterRequest $request) :UserResource
     {
         return new UserResource($this->userService->store($request->all()));
     }

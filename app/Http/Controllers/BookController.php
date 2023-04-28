@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Services\BookService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class BookController extends Controller
@@ -28,7 +29,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index() :BookResource
     {
         return BookResource::collection($this->bookService->all());
     }
@@ -39,7 +40,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return BookResource
      */
-    public function store(BookRequest $request)
+    public function store(BookRequest $request) :BookResource
     {
         return new BookResource($this->bookService->store($request->all()));
     }
@@ -50,7 +51,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return BookResource
      */
-    public function show($id)
+    public function show($id) :BookResource
     {
         return new BookResource($this->bookService->findById($id));
     }
@@ -62,7 +63,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(BookRequest $request, $id)
+    public function update(BookRequest $request, $id) :JsonResponse
     {
         $this->bookService->update($id, $request->all());
 
@@ -77,7 +78,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id) :JsonResponse
     {
         $this->bookService->destroy($id);
 

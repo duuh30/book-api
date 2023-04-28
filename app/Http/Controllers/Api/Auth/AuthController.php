@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Exceptions\CreateTokenException;
 use App\Exceptions\InvalidCredentialsException;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -41,7 +43,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request) :JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
 

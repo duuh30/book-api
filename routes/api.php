@@ -17,12 +17,14 @@ use \App\Http\Controllers\BookController;
 */
 
 Route::middleware("auth:sanctum")->group(function() {
-    Route::post("logout", [AuthController::class, 'logout']);
-    Route::apiResource("books", BookController::class);
-
     Route::prefix("oauth")->group(function() {
-        Route::post("login", [AuthController::class, 'login']);
+        Route::post("logout", [AuthController::class, 'logout']);
     });
+    Route::apiResource("books", BookController::class);
+});
+
+Route::prefix("oauth")->group(function() {
+    Route::post("login", [AuthController::class, 'login']);
 });
 
 Route::post("users", [RegisterController::class, 'register']);

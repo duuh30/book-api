@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Services\BookService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class BookController extends Controller
@@ -29,7 +30,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index() :BookResource
+    public function index(): AnonymousResourceCollection
     {
         return BookResource::collection($this->bookService->all());
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Book\ValueDecimalRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookRequest extends FormRequest
@@ -13,10 +14,11 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name' => 'required',
             'isbn' => 'required|numeric|int',
-            'value' => 'required|regex:/^(([0-9]*)(\.([0-9]+))?)$/',
+            'value' => ['required', new ValueDecimalRule],
         ];
     }
 }
